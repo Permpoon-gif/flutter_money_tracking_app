@@ -8,8 +8,8 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-    url: '',
-    anonKey: '',
+    url: 'https://yxofwqhqhnoywtrwxjvk.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4b2Z3cWhxaG5veXd0cnd4anZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTgzNTIsImV4cCI6MjA5MTczNDM1Mn0.Tsqd6w-_9ohgo1bVgV89Mp-zaP0WXnsuUbX7ke-lN2Y',
   );
 
   runApp(FlutterMoneyTrackingApp());
@@ -27,7 +27,7 @@ class _FlutterMoneyTrackingAppState extends State<FlutterMoneyTrackingApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splashscreenui(),
+      home: SplashScreen(),
       theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
     );
