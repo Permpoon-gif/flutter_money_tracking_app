@@ -35,8 +35,7 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
 
     setState(() => _isSaving = true);
 
-    final provider =
-        Provider.of<TransactionProvider>(context, listen: false);
+    final provider = Provider.of<TransactionProvider>(context, listen: false);
 
     final tx = Transaction(
       title: _titleController.text,
@@ -93,7 +92,7 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
   Widget _header(TransactionProvider provider) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.fromLTRB(20, 50, 20, 30),
+      padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [Color(0xFF3E9E90), Color(0xFF2F8075)],
@@ -101,19 +100,20 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
           end: Alignment.bottomCenter,
         ),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
+          bottomLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
         ),
       ),
       child: Column(
         children: [
-          const Row(
+        const Positioned(
+          top: 20,
+          left: 20,
+          right: 20,
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Firstname Lastname',
-                style: TextStyle(color: Colors.white),
-              ),
+              Text('Firstname Lastname', style: TextStyle(color: Colors.white)),
               CircleAvatar(
                 radius: 18,
                 backgroundImage:
@@ -121,72 +121,95 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
               )
             ],
           ),
+        ),
           const SizedBox(height: 20),
-
-          const Text(
-            'ยอดเงินคงเหลือ',
-            style: TextStyle(color: Colors.white70),
-          ),
-          const SizedBox(height: 5),
-
-          Text(
-            _formatNumber(provider.totalBalance),
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+          Positioned(
+          left: 20,
+          right: 20,
+          bottom: 20,
+          child: Container(
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(20),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Column(
-                  children: [
-                    const Text('ยอดเงินเข้ารวม',
-                        style: TextStyle(color: Colors.white70)),
-                    Text(
-                      _formatNumber(provider.totalIncome),
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ],
+                const Text(
+                  'ยอดเงินคงเหลือ',
+                  style: TextStyle(color: Colors.white70),
                 ),
-                Column(
+                const SizedBox(height: 5),
+                Text(
+                  _formatNumber(provider.totalBalance),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('ยอดเงินออกรวม',
-                        style: TextStyle(color: Colors.white70)),
-                    Text(
-                      _formatNumber(provider.totalExpense),
-                      style: const TextStyle(color: Colors.white),
+                    Column(
+                      children: [
+                        const Text('ยอดเงินเข้ารวม',
+                            style: TextStyle(color: Colors.white70)),
+                        Text(
+                          _formatNumber(provider.totalIncome),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text('ยอดเงินออกรวม',
+                            style: TextStyle(color: Colors.white70)),
+                        Text(
+                          _formatNumber(provider.totalExpense),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
-          )
+          ),
+        ),
         ],
       ),
     );
+
+    
   }
 
   // ================= DATE =================
   Widget _date() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        'วันที่ ${_formatDateThai(_selectedDate)}',
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'วันที่ ${_formatDateThai(DateTime.now())}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5),
+          const Text(
+            'เงินออก',
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFF3E9E90),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -213,7 +236,6 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
             const SizedBox(height: 15),
             _input(_amountController, '0.00', isNumber: true),
             const SizedBox(height: 20),
-
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -254,8 +276,7 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:
-              const BorderSide(color: Color(0xFF3E9E90), width: 2),
+          borderSide: const BorderSide(color: Color(0xFF3E9E90), width: 2),
         ),
       ),
       validator: (v) {

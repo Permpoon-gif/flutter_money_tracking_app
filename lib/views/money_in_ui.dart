@@ -34,8 +34,7 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
 
     setState(() => _isSaving = true);
 
-    final provider =
-        Provider.of<TransactionProvider>(context, listen: false);
+    final provider = Provider.of<TransactionProvider>(context, listen: false);
 
     final tx = Transaction(
       title: _titleController.text,
@@ -109,14 +108,13 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
 
         // user row
         const Positioned(
-          top: 50,
+          top: 20,
           left: 20,
           right: 20,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Firstname Lastname',
-                  style: TextStyle(color: Colors.white)),
+              Text('Firstname Lastname', style: TextStyle(color: Colors.white)),
               CircleAvatar(
                 radius: 18,
                 backgroundImage:
@@ -138,11 +136,11 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text('ยอดเงินคงเหลือ',
                     style: TextStyle(color: Colors.white70)),
                 const SizedBox(height: 5),
-
                 Text(
                   _formatNumber(provider.totalBalance),
                   style: const TextStyle(
@@ -150,16 +148,32 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
                       fontSize: 28,
                       fontWeight: FontWeight.bold),
                 ),
-
                 const SizedBox(height: 15),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _miniInfo('รายรับ', provider.totalIncome),
-                    _miniInfo('รายจ่าย', provider.totalExpense),
+                    Column(
+                      children: [
+                        const Text('ยอดเงินเข้ารวม',
+                            style: TextStyle(color: Colors.white70)),
+                        Text(
+                          _formatNumber(provider.totalIncome),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        const Text('ยอดเงินออกรวม',
+                            style: TextStyle(color: Colors.white70)),
+                        Text(
+                          _formatNumber(provider.totalExpense),
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -176,8 +190,8 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
         const SizedBox(height: 4),
         Text(
           _formatNumber(value),
-          style: const TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold),
+          style:
+              const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ],
     );
@@ -185,14 +199,28 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
 
   // ================= DATE =================
   Widget _date() {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Text(
-        'วันที่ ${_formatDateThai(_selectedDate)}',
-        style: const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        ),
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            'วันที่ ${_formatDateThai(DateTime.now())}',
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 5),
+          const Text(
+            'เงินเข้า',
+            style: TextStyle(
+              fontSize: 14,
+              color: Color(0xFF3E9E90),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -219,7 +247,6 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
             const SizedBox(height: 15),
             _input(_amountController, '0.00', isNumber: true),
             const SizedBox(height: 20),
-
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -266,8 +293,7 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide:
-              const BorderSide(color: Color(0xFF3E9E90), width: 2),
+          borderSide: const BorderSide(color: Color(0xFF3E9E90), width: 2),
         ),
       ),
       validator: (v) {
