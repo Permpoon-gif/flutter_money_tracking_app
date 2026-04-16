@@ -24,28 +24,35 @@ class _MoneyBalanceScreenState extends State<MoneyBalanceScreen> {
     _loadData();
   }
  
-  Future<void> _loadData() async {
-    setState(() => _isLoading = true);
-    try {
-      final summary = await _service.getSummary();
-      final txs = await _service.fetchAll();
-      setState(() {
-        _income = summary['income']!;
-        _outcome = summary['outcome']!;
-        _balance = summary['balance']!;
-        _transactions = txs;
-        _isLoading = false;
-      });
-    } catch (e) {
-      setState(() => _isLoading = false);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('เกิดข้อผิดพลาด: $e'), backgroundColor: Colors.red),
-        );
-      }
+Future<void> _loadData() async {
+  setState(() => _isLoading = true);
+  try {
+    final summary = await _service.getSummary();
+    final txs = await _service.fetchAll();
+
+    // ✅ เรียงจากวันที่ล่าสุด
+    txs.sort((a, b) => b.date.compareTo(a.date));
+
+    setState(() {
+      _income = summary['income']!;
+      _outcome = summary['outcome']!;
+      _balance = summary['balance']!;
+      _transactions = txs;
+      _isLoading = false;
+    });
+  } catch (e) {
+    setState(() => _isLoading = false);
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('เกิดข้อผิดพลาด: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
- 
+}
+
   String _formatNumber(double value) {
     final formatter = NumberFormat('#,##0.00', 'en_US');
     return formatter.format(value);
