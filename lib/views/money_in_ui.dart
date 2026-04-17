@@ -154,21 +154,61 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
                   children: [
                     Column(
                       children: [
-                        const Text('ยอดเงินเข้ารวม',
-                            style: TextStyle(color: Colors.white70)),
-                        Text(
-                          _formatNumber(provider.totalIncome),
-                          style: const TextStyle(color: Colors.white),
+                        const Text(
+                          'ยอดเงินเข้ารวม',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.green.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.arrow_downward_rounded,
+                                color: Colors.green,
+                                size: 18,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              _formatNumber(provider.totalIncome),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                     Column(
                       children: [
-                        const Text('ยอดเงินออกรวม',
-                            style: TextStyle(color: Colors.white70)),
-                        Text(
-                          _formatNumber(provider.totalExpense),
-                          style: const TextStyle(color: Colors.white),
+                        const Text(
+                          'ยอดเงินออกรวม',
+                          style: TextStyle(color: Colors.white70),
+                        ),
+                        const SizedBox(height: 5),
+                        Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: Colors.red.withOpacity(0.2),
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.arrow_upward_rounded,
+                                color: Colors.red,
+                                size: 18,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              _formatNumber(provider.totalExpense),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -242,9 +282,27 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
       child: Form(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+      'รายการเงินเข้า',
+      style: TextStyle(
+        fontSize: 14,
+        color: Colors.black,
+      ),
+    ),
+    const SizedBox(height: 5),
             _input(_titleController, 'DETAIL'),
             const SizedBox(height: 15),
+            const Text(
+              'จํานวนเงิน',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 5),
+            
             _input(_amountController, '0.00', isNumber: true),
             const SizedBox(height: 20),
             SizedBox(
@@ -319,7 +377,6 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
       children: provider.incomeList.map((tx) {
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
-          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -330,25 +387,34 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
               )
             ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(tx.title),
-                  Text(
-                    _formatDateThai(tx.date),
-                    style: const TextStyle(fontSize: 12),
-                  ),
-                ],
+          child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+
+            // 🔵 วงกลมไอคอน
+            leading: CircleAvatar(
+              backgroundColor: Colors.green.shade50,
+              child: const Icon(
+                Icons.arrow_downward_rounded,
+                color: Colors.green,
               ),
-              Text(
-                '+฿${_formatNumber(tx.amount)}',
-                style: const TextStyle(
-                    color: Colors.green, fontWeight: FontWeight.bold),
+            ),
+
+            // 📄 ข้อมูลรายการ
+            title: Text(tx.title),
+            subtitle: Text(
+              _formatDateThai(tx.date),
+              style: const TextStyle(fontSize: 12),
+            ),
+
+            // 💰 จำนวนเงิน
+            trailing: Text(
+              '+฿${_formatNumber(tx.amount)}',
+              style: const TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-            ],
+            ),
           ),
         );
       }).toList(),

@@ -106,84 +106,123 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
       ),
       child: Column(
         children: [
-        const Positioned(
-          top: 20,
-          left: 20,
-          right: 20,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text('Firstname Lastname', style: TextStyle(color: Colors.white)),
-              CircleAvatar(
-                radius: 18,
-                backgroundImage:
-                    NetworkImage('https://i.pravatar.cc/150?img=3'),
-              )
-            ],
-          ),
-        ),
-          const SizedBox(height: 20),
-          Positioned(
-          left: 20,
-          right: 20,
-          bottom: 20,
-          child: Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+          const Positioned(
+            top: 20,
+            left: 20,
+            right: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  'ยอดเงินคงเหลือ',
-                  style: TextStyle(color: Colors.white70),
-                ),
-                const SizedBox(height: 5),
-                Text(
-                  _formatNumber(provider.totalBalance),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        const Text('ยอดเงินเข้ารวม',
-                            style: TextStyle(color: Colors.white70)),
-                        Text(
-                          _formatNumber(provider.totalIncome),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        const Text('ยอดเงินออกรวม',
-                            style: TextStyle(color: Colors.white70)),
-                        Text(
-                          _formatNumber(provider.totalExpense),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                Text('Firstname Lastname',
+                    style: TextStyle(color: Colors.white)),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundImage:
+                      NetworkImage('https://i.pravatar.cc/150?img=3'),
+                )
               ],
             ),
           ),
-        ),
+          const SizedBox(height: 20),
+          Positioned(
+            left: 20,
+            right: 20,
+            bottom: 20,
+            child: Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.15),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'ยอดเงินคงเหลือ',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(height: 5),
+                  Text(
+                    _formatNumber(provider.totalBalance),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'ยอดเงินเข้ารวม',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Colors.green.withOpacity(0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_downward_rounded,
+                                  color: Colors.green,
+                                  size: 18,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                _formatNumber(provider.totalIncome),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text(
+                            'ยอดเงินออกรวม',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(6),
+                                decoration: BoxDecoration(
+                                  color: Colors.red.withOpacity(0.2),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_upward_rounded,
+                                  color: Colors.red,
+                                  size: 18,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                _formatNumber(provider.totalExpense),
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
-
-    
   }
 
   // ================= DATE =================
@@ -291,11 +330,17 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
 
   // ================= LIST =================
   Widget _transactionList(TransactionProvider provider) {
+    if (provider.outcomeList.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(40),
+        child: Text('ยังไม่มีรายการ'),
+      );
+    }
+
     return Column(
       children: provider.outcomeList.map((tx) {
         return Container(
           margin: const EdgeInsets.only(bottom: 10),
-          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -306,15 +351,34 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
               )
             ],
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(tx.title),
-              Text(
-                '-฿${_formatNumber(tx.amount)}',
-                style: const TextStyle(color: Colors.red),
+          child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+
+            // 🔴 วงกลมไอคอน (เงินออก)
+            leading: CircleAvatar(
+              backgroundColor: Colors.red.shade50,
+              child: const Icon(
+                Icons.arrow_upward_rounded,
+                color: Colors.red,
               ),
-            ],
+            ),
+
+            // 📄 รายละเอียด
+            title: Text(tx.title),
+            subtitle: Text(
+              _formatDateThai(tx.date),
+              style: const TextStyle(fontSize: 12),
+            ),
+
+            // 💸 จำนวนเงิน
+            trailing: Text(
+              '-฿${_formatNumber(tx.amount)}',
+              style: const TextStyle(
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         );
       }).toList(),
