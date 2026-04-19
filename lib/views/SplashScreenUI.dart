@@ -64,7 +64,6 @@ class _SplashScreenState extends State<SplashScreen>
             end: Alignment.bottomRight,
           ),
         ),
-        
         child: Center(
           child: FadeTransition(
             opacity: _fadeAnim,
@@ -133,10 +132,8 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
 
-                  
                   Column(
                     children: [
-                    
                       const SizedBox(height: 350),
                       const Text(
                         'Created by 6619410020 ',
@@ -158,11 +155,9 @@ class _SplashScreenState extends State<SplashScreen>
                   ),
                 ],
               ),
-              
             ),
           ),
         ),
-        
       ),
     );
   }

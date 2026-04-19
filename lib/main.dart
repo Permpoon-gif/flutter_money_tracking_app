@@ -8,7 +8,6 @@ import 'package:intl/date_symbol_data_local.dart';
 // ✅ เพิ่ม 2 ตัวนี้
 import 'package:provider/provider.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -16,7 +15,8 @@ void main() async {
 
   await Supabase.initialize(
     url: 'https://yxofwqhqhnoywtrwxjvk.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4b2Z3cWhxaG5veXd0cnd4anZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTgzNTIsImV4cCI6MjA5MTczNDM1Mn0.Tsqd6w-_9ohgo1bVgV89Mp-zaP0WXnsuUbX7ke-lN2Y',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl4b2Z3cWhxaG5veXd0cnd4anZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxNTgzNTIsImV4cCI6MjA5MTczNDM1Mn0.Tsqd6w-_9ohgo1bVgV89Mp-zaP0WXnsuUbX7ke-lN2Y',
   );
 
   // 🔥 ห่อ Provider ตรงนี้
@@ -36,16 +36,14 @@ class FlutterMoneyTrackingApp extends StatefulWidget {
       _FlutterMoneyTrackingAppState();
 }
 
-class _FlutterMoneyTrackingAppState
-    extends State<FlutterMoneyTrackingApp> {
+class _FlutterMoneyTrackingAppState extends State<FlutterMoneyTrackingApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
       theme: ThemeData(
-        textTheme:
-            GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),
     );
   }

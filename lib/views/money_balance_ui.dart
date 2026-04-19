@@ -1,75 +1,76 @@
 // lib/screens/money_balance_screen.dart
- 
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/transaction.dart';
 import '../services/transaction_service.dart';
- 
+
 class MoneyBalanceScreen extends StatefulWidget {
   const MoneyBalanceScreen({super.key});
- 
+
   @override
   State<MoneyBalanceScreen> createState() => _MoneyBalanceScreenState();
 }
- 
+
 class _MoneyBalanceScreenState extends State<MoneyBalanceScreen> {
   final _service = TransactionService();
   List<Transaction> _transactions = [];
   double _income = 0, _outcome = 0, _balance = 0;
   bool _isLoading = true;
- 
+
   @override
   void initState() {
     super.initState();
     _loadData();
   }
- 
-Future<void> _loadData() async {
-  setState(() => _isLoading = true);
-  try {
-    final summary = await _service.getSummary();
-    final txs = await _service.fetchAll();
 
-    // ✅ เรียงจากวันที่ล่าสุด
-    txs.sort((a, b) => b.date.compareTo(a.date));
+  Future<void> _loadData() async {
+    setState(() => _isLoading = true);
+    try {
+      final summary = await _service.getSummary();
+      final txs = await _service.fetchAll();
 
-    setState(() {
-      _income = summary['income']!;
-      _outcome = summary['outcome']!;
-      _balance = summary['balance']!;
-      _transactions = txs;
-      _isLoading = false;
-    });
-  } catch (e) {
-    setState(() => _isLoading = false);
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('เกิดข้อผิดพลาด: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      // ✅ เรียงจากวันที่ล่าสุด
+      txs.sort((a, b) => b.date.compareTo(a.date));
+
+      setState(() {
+        _income = summary['income']!;
+        _outcome = summary['outcome']!;
+        _balance = summary['balance']!;
+        _transactions = txs;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() => _isLoading = false);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('เกิดข้อผิดพลาด: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
     }
   }
-}
 
   String _formatNumber(double value) {
     final formatter = NumberFormat('#,##0.00', 'en_US');
     return formatter.format(value);
   }
- 
+
   String _formatDate(DateTime date) {
     final formatter = DateFormat('d MMMM yyyy', 'th');
     return formatter.format(date);
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       body: SafeArea(
         child: _isLoading
-            ? const Center(child: CircularProgressIndicator(color: Color(0xFF2DB89D)))
+            ? const Center(
+                child: CircularProgressIndicator(color: Color(0xFF2DB89D)))
             : RefreshIndicator(
                 color: const Color(0xFF2DB89D),
                 onRefresh: _loadData,
@@ -110,7 +111,8 @@ Future<void> _loadData() async {
                                 child: Text(
                                   'ยังไม่มีรายการ\nลองเพิ่มรายรับหรือรายจ่ายดูสิ!',
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                                  style: TextStyle(
+                                      color: Colors.grey, fontSize: 16),
                                 ),
                               ),
                             ),
@@ -129,19 +131,19 @@ Future<void> _loadData() async {
       ),
     );
   }
- 
+
   Widget _buildHeader() {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-        colors: [
-          Color.fromARGB(255, 91, 117, 231),
-          Color.fromARGB(255, 198, 235, 255),
-        ],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+          colors: [
+            Color.fromARGB(255, 91, 117, 231),
+            Color.fromARGB(255, 198, 235, 255),
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
           bottomRight: Radius.circular(32),
@@ -160,7 +162,8 @@ Future<void> _loadData() async {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('สวัสดี!', style: TextStyle(color: Colors.white70, fontSize: 14)),
+                    Text('สวัสดี!',
+                        style: TextStyle(color: Colors.white70, fontSize: 14)),
                     Text(
                       'Permpoom Chouton',
                       style: TextStyle(
@@ -178,7 +181,8 @@ Future<void> _loadData() async {
             ],
           ),
           const SizedBox(height: 24),
-          const Text('ยอดคงเหลือ', style: TextStyle(color: Colors.white70, fontSize: 14)),
+          const Text('ยอดคงเหลือ',
+              style: TextStyle(color: Colors.white70, fontSize: 14)),
           const SizedBox(height: 8),
           Text(
             '฿${_formatNumber(_balance)}',
@@ -193,7 +197,7 @@ Future<void> _loadData() async {
       ),
     );
   }
- 
+
   Widget _buildSummaryCards() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
@@ -220,7 +224,7 @@ Future<void> _loadData() async {
       ),
     );
   }
- 
+
   Widget _buildTransactionTile(Transaction tx) {
     final isIncome = tx.type == TransactionType.income;
     return Container(
@@ -239,8 +243,7 @@ Future<void> _loadData() async {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         leading: CircleAvatar(
-          backgroundColor:
-              isIncome ? Colors.green.shade50 : Colors.red.shade50,
+          backgroundColor: isIncome ? Colors.green.shade50 : Colors.red.shade50,
           child: Icon(
             isIncome ? Icons.arrow_downward : Icons.arrow_upward,
             color: isIncome ? Colors.green : Colors.red,
@@ -266,20 +269,20 @@ Future<void> _loadData() async {
     );
   }
 }
- 
+
 class _SummaryCard extends StatelessWidget {
   final String label;
   final double amount;
   final Color color;
   final IconData icon;
- 
+
   const _SummaryCard({
     required this.label,
     required this.amount,
     required this.color,
     required this.icon,
   });
- 
+
   @override
   Widget build(BuildContext context) {
     final formatter = NumberFormat('#,##0.00', 'en_US');
@@ -307,7 +310,8 @@ class _SummaryCard extends StatelessWidget {
                 child: Icon(icon, size: 16, color: color),
               ),
               const SizedBox(width: 8),
-              Text(label, style: TextStyle(color: color, fontWeight: FontWeight.w500)),
+              Text(label,
+                  style: TextStyle(color: color, fontWeight: FontWeight.w500)),
             ],
           ),
           const SizedBox(height: 12),

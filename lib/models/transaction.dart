@@ -1,5 +1,5 @@
 enum TransactionType { income, outcome }
- 
+
 class Transaction {
   final String? id;
   final String title;
@@ -7,7 +7,7 @@ class Transaction {
   final TransactionType type;
   final DateTime date;
   final String? note;
- 
+
   Transaction({
     this.id,
     required this.title,
@@ -16,7 +16,7 @@ class Transaction {
     required this.date,
     this.note,
   });
- 
+
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
       id: json['id']?.toString(),
@@ -29,7 +29,7 @@ class Transaction {
       note: json['note'],
     );
   }
- 
+
   Map<String, dynamic> toJson() {
     return {
       'title': title,

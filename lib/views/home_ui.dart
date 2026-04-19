@@ -1,27 +1,26 @@
 // lib/screens/home_screen.dart
- 
+
 import 'package:flutter/material.dart';
 import 'package:flutter_money_tracking_app/views/money_balance_ui.dart';
 import 'package:flutter_money_tracking_app/views/money_in_ui.dart';
 import 'package:flutter_money_tracking_app/views/money_out_ui.dart';
 
- 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
- 
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
- 
+
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 1; // เริ่มที่หน้า Balance (กลาง)
- 
+
   final List<Widget> _screens = [
     const MoneyIncomeScreen(),
     const MoneyBalanceScreen(),
     const MoneyOutcomeScreen(),
   ];
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

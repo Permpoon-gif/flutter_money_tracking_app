@@ -95,7 +95,10 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color.fromARGB(255, 91, 117, 231), Color.fromARGB(255, 198, 235, 255)],
+          colors: [
+            Color.fromARGB(255, 91, 117, 231),
+            Color.fromARGB(255, 198, 235, 255)
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -114,10 +117,10 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Permpoom Chouton', style: TextStyle(color: Colors.white)),
-              CircleAvatar(
-                radius: 18,
-                backgroundImage: AssetImage('assets/images/permpoon.png'),
-              ),
+                CircleAvatar(
+                  radius: 18,
+                  backgroundImage: AssetImage('assets/images/permpoon.png'),
+                ),
               ],
             ),
           ),
@@ -304,10 +307,10 @@ class _MoneyOutcomeScreenState extends State<MoneyOutcomeScreen> {
                 onPressed: _isSaving ? null : _saveTransaction,
                 child: const Text(
                   'บันทึกเงินออก',
-                  style: TextStyle(fontSize: 16,
-                  color: Colors.white,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
                   ),
-                  
                 ),
               ),
             )
