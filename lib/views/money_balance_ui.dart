@@ -201,7 +201,7 @@ Future<void> _loadData() async {
         children: [
           Expanded(
             child: _SummaryCard(
-              label: 'รายรับ',
+              label: 'ยอดเงินเข้ารวม',
               amount: _income,
               color: Colors.green,
               icon: Icons.arrow_downward_rounded,
@@ -210,7 +210,7 @@ Future<void> _loadData() async {
           const SizedBox(width: 16),
           Expanded(
             child: _SummaryCard(
-              label: 'รายจ่าย',
+              label: 'ยอดเงินออกรวม',
               amount: _outcome,
               color: Colors.red,
               icon: Icons.arrow_upward_rounded,

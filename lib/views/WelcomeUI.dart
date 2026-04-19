@@ -58,17 +58,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 40),
 
-                /// WELCOME TEXT
-                const Text(
-                  'WELCOME',
-                  style: TextStyle(
-                    fontSize: 11,
-                    letterSpacing: 4,
-                    color: Color(0xFFB4D2FF),
-                  ),
-                ),
 
                 const SizedBox(height: 10),
 
@@ -88,19 +78,14 @@ class WelcomeScreen extends StatelessWidget {
 
                 /// DESCRIPTION
                 const Text(
-                  'จัดการเงินของคุณให้ง่ายขึ้น\nด้วยดีไซน์ที่ทันสมัย ใช้งานง่าย',
+                  'จัดการเงินของคุณให้ง่ายขึ้น\nทันสมัย ใช้งานง่าย',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 14,
-                    color: Color(0xCCFFFFFF),
+                    fontSize: 16,
+                    color: Color.fromARGB(255, 255, 255, 255),
                     height: 1.6,
                   ),
                 ),
-
-
-
-  
-
 
                 const Spacer(),
 
@@ -153,14 +138,6 @@ class WelcomeScreen extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 14),
-
-                const Text(
-                  'ฟรี • ไม่มีโฆษณา',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0x99FFFFFF),
-                  ),
-                ),
 
                 const SizedBox(height: 36),
               ],
