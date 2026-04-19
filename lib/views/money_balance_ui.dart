@@ -134,7 +134,14 @@ Future<void> _loadData() async {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: const BoxDecoration(
-        color: Color(0xFF2DB89D),
+        gradient: LinearGradient(
+        colors: [
+          Color.fromARGB(255, 91, 117, 231),
+          Color.fromARGB(255, 198, 235, 255),
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(32),
           bottomRight: Radius.circular(32),
@@ -144,9 +151,9 @@ Future<void> _loadData() async {
         children: [
           Row(
             children: [
-              const CircleAvatar(
-                backgroundColor: Colors.white24,
-                child: Icon(Icons.person, color: Colors.white),
+              CircleAvatar(
+                radius: 18,
+                backgroundImage: AssetImage('assets/images/permpoon.png'),
               ),
               const SizedBox(width: 12),
               const Expanded(
@@ -155,7 +162,7 @@ Future<void> _loadData() async {
                   children: [
                     Text('สวัสดี!', style: TextStyle(color: Colors.white70, fontSize: 14)),
                     Text(
-                      'Firstname Lastname',
+                      'Permpoom Chouton',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

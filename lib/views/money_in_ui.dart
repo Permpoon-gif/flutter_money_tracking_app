@@ -95,7 +95,10 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
           height: 260,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF3E9E90), Color(0xFF2F8075)],
+              colors: [
+                Color.fromARGB(255, 91, 117, 231),
+                Color.fromARGB(255, 198, 235, 255)
+              ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),
@@ -114,12 +117,11 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Firstname Lastname', style: TextStyle(color: Colors.white)),
+              Text('Permpoom Chouton', style: TextStyle(color: Colors.white)),
               CircleAvatar(
                 radius: 18,
-                backgroundImage:
-                    NetworkImage('https://i.pravatar.cc/150?img=3'),
-              )
+                backgroundImage: AssetImage('assets/images/permpoon.png'),
+              ),
             ],
           ),
         ),
@@ -285,13 +287,13 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-      'รายการเงินเข้า',
-      style: TextStyle(
-        fontSize: 14,
-        color: Colors.black,
-      ),
-    ),
-    const SizedBox(height: 5),
+              'รายการเงินเข้า',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 5),
             _input(_titleController, 'DETAIL'),
             const SizedBox(height: 15),
             const Text(
@@ -302,14 +304,13 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
               ),
             ),
             const SizedBox(height: 5),
-            
             _input(_amountController, '0.00', isNumber: true),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF3E9E90),
+                  backgroundColor: const Color.fromARGB(255, 81, 204, 186),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
@@ -326,7 +327,12 @@ class _MoneyIncomeScreenState extends State<MoneyIncomeScreen> {
                           strokeWidth: 2,
                         ),
                       )
-                    : const Text('บันทึกเงินเข้า'),
+                    : const Text(
+                        'บันทึกเงินเข้า',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
               ),
             )
           ],
