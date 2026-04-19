@@ -1,16 +1,15 @@
 # flutter_money_tracking_app
 
-A new Flutter project.
+<img width="250" src="https://github.com/user-attachments/assets/5cd92776-576f-4247-b16c-42bb1253c543" />
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+<img width="250"  src="https://github.com/user-attachments/assets/49bd7055-c092-4fd7-bcc7-0238abbbe20a" />
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img width="250"  src="https://github.com/user-attachments/assets/1d885af5-5884-4c6b-a647-4abe3bd6c5dc" />
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+<img width="250" src="https://github.com/user-attachments/assets/5bb76ee4-5984-42a6-a655-f8e54eed5083" />
+
+
+<img width="250" src="https://github.com/user-attachments/assets/cdecd6b5-d782-4c6f-a229-fad1b0770d04" />
